@@ -33,10 +33,11 @@ function createDOM() {
 
   searchContainer.appendChild(searchInput);
   searchContainer.appendChild(searchButton);
-  searchContainer.appendChild(toggleButton);
+  
 
   headerElement.appendChild(logo);
   headerElement.appendChild(searchContainer);
+  headerElement.appendChild(toggleButton);
 
   const mainElement = document.createElement('main');
   mainElement.id = 'main';

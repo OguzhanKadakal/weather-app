@@ -58,6 +58,8 @@ function createDOM() {
   weatherInfoContainer.id = 'weather-info';
   weatherInfoContainer.className = 'weather-info-container';
 
+  
+
   appElement.appendChild(headerElement);
   appElement.appendChild(mainElement);
   appElement.appendChild(footerElement);

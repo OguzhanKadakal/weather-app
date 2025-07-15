@@ -1,5 +1,6 @@
 import './styles.css' 
-import { fetchWeatherData } from './modules/weather-data';
 import { createDOM } from './modules/dom';
+import { setupSearchEvents } from './modules/events';
+
 createDOM();
-fetchWeatherData();
+setupSearchEvents();

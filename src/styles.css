@@ -98,3 +98,12 @@ a {
 .toggle-temp:active {
   transform: scale(1.0);
 }
+
+.weather-info-container {
+  background: rgba(255, 255, 255, 0.10);
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(52, 120, 246, 0.15);
+  padding: 2rem;
+  max-width: 800px;
+  margin: 2rem auto;
+}

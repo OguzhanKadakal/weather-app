@@ -16,7 +16,9 @@ function createDOM() {
   const searchInput = document.createElement('input');
   searchInput.type = 'text';
   searchInput.placeholder = 'Search city...';
-  searchInput.className = 'search-input';
+  searchInput.className = 'search-box';
+  searchInput.id = 'search-input';
+  
 
   const searchButton = document.createElement('button');
   searchButton.type = 'button';

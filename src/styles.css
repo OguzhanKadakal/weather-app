@@ -3,6 +3,8 @@
     --background-gradient: linear-gradient(to bottom, #69BFFF, #3478F6);
     --text-color: #FAFAFA;
     --input-background: #3d3d3d;
+    --temp-button-celcius: linear-gradient(to right, #FFD600 20%, #FAFAFA 70%);
+    --temp-button-fahrenheight: linear-gradient(to right, #FAFAFA 70%, #FFD600 20%);
 }
 
 /* CSS Reset */
@@ -83,7 +85,16 @@ a {
 }
 
 .toggle-temp {
-  background-color: var(--text-color);
+  cursor: pointer;
+  background: var(--temp-button-celcius);
   padding: 8px 12px 8px 12px;
   border-radius: 8px;
+}
+
+.toggle-temp:hover {
+  transform: scale(1.10);
+}
+
+.toggle-temp:active {
+  transform: scale(1.0);
 }

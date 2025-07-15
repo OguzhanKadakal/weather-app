@@ -50,7 +50,40 @@ a {
 
 .header {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   padding: 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.search-container {
+  background-color: var(--text-color);
+  border-radius: 8px;
+}
+
+.search-input-group {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 8px;
+}
+
+.search-button {
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s;
+}
+
+.search-button:hover {
+  transform: scale(1.20);
+}
+
+.search-button:active {
+  transform: scale(1.0);
+}
+
+.toggle-temp {
+  background-color: var(--text-color);
+  padding: 8px 12px 8px 12px;
+  border-radius: 8px;
 }

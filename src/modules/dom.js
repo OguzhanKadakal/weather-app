@@ -1,3 +1,5 @@
+import searchIconSvg from '../assets/tools/search.svg';
+
 function createDOM() {
   const appElement = document.querySelector('#app');
   const headerElement = document.createElement('header');
@@ -19,7 +21,11 @@ function createDOM() {
   const searchButton = document.createElement('button');
   searchButton.type = 'button';
   searchButton.className = 'search-button';
-  searchButton.textContent = 'Search';
+  const searchIcon = document.createElement('img');
+  searchIcon.src = searchIconSvg;
+  searchIcon.alt = 'Search';
+  searchIcon.className = 'search-icon';
+  searchButton.appendChild(searchIcon);
 
   const searchInputGroup = document.createElement('div');
   searchInputGroup.className = 'search-input-group';
@@ -31,8 +37,7 @@ function createDOM() {
   toggleButton.className = 'toggle-temp';
   toggleButton.textContent = '°C / °F';
 
-  searchContainer.appendChild(searchInput);
-  searchContainer.appendChild(searchButton);
+  searchContainer.appendChild(searchInputGroup);
   
 
   headerElement.appendChild(logo);

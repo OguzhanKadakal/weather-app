@@ -36,7 +36,7 @@ function createDOM() {
 
   const toggleButton = document.createElement('button');
   toggleButton.type = 'button';
-  toggleButton.className = 'toggle-temp';
+  toggleButton.className = 'toggle-temp celcius';
   toggleButton.textContent = '°C / °F';
 
   searchContainer.appendChild(searchInputGroup);

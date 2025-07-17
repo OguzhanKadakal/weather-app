@@ -1,4 +1,5 @@
 import { fetchWeatherData } from './weather-data.js';
+import { displayWeatherInfo } from './dom.js';
 
 function setupSearchEvents() {
   const searchInput = document.querySelector('#search-input');
@@ -8,7 +9,13 @@ function setupSearchEvents() {
     const query = searchInput.value.trim().toLowerCase();
     if (query) {
       searchInput.value = '';
-      await fetchWeatherData(query);
+      try {
+        const weatherData = await fetchWeatherData(query);
+        displayWeatherInfo(weatherData);
+      } catch (error) {
+        console.error('Error fetching weather data:', error);
+        displayWeatherInfo(null);
+      }
     }
   };
 

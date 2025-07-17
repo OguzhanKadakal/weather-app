@@ -1,5 +1,4 @@
 import searchIconSvg from '../assets/tools/search.svg';
-import { fetchWeatherData } from '../modules/weather-data'
 
 function createDOM() {
   const appElement = document.querySelector('#app');
@@ -19,7 +18,6 @@ function createDOM() {
   searchInput.placeholder = 'Search city...';
   searchInput.className = 'search-box';
   searchInput.id = 'search-input';
-  
 
   const searchButton = document.createElement('button');
   searchButton.type = 'button';
@@ -41,7 +39,6 @@ function createDOM() {
   toggleButton.textContent = '°C / °F';
 
   searchContainer.appendChild(searchInputGroup);
-  
 
   headerElement.appendChild(logo);
   headerElement.appendChild(searchContainer);
@@ -59,8 +56,6 @@ function createDOM() {
   weatherInfoContainer.id = 'weather-info';
   weatherInfoContainer.className = 'weather-info-container';
 
-  
-
   appElement.appendChild(headerElement);
   appElement.appendChild(mainElement);
   appElement.appendChild(footerElement);
@@ -68,8 +63,19 @@ function createDOM() {
   mainElement.appendChild(weatherInfoContainer);
 }
 
+function displayWeatherInfo(data) {
+  const weatherInfoContainer = document.querySelector('#weather-info');
+  weatherInfoContainer.innerHTML = '';
 
-function displayWeatherInfo() {
+  //if (!data) {
+  // weatherInfoContainer.innerHTML = '<p>No weather data available</p>';
+  // return;
+  //}
 
+  const resolvedAddress = document.createElement('h2');
+  resolvedAddress.textContent = data.resolvedAddress;
+
+  weatherInfoContainer.appendChild(resolvedAddress);
 }
-export { createDOM };
+
+export { createDOM, displayWeatherInfo };

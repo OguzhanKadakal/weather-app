@@ -4,7 +4,7 @@
     --text-color: #FAFAFA;
     --input-background: #3d3d3d;
     --temp-button-celcius: linear-gradient(to right, #FFD600 20%, #FAFAFA 70%);
-    --temp-button-fahrenheight: linear-gradient(to right, #FAFAFA 70%, #FFD600 20%);
+    --temp-button-fahrenheit: linear-gradient(to right, #FAFAFA 70%, #FFD600 20%);
 }
 
 /* CSS Reset */
@@ -86,7 +86,6 @@ a {
 
 .toggle-temp {
   cursor: pointer;
-  background: var(--temp-button-celcius);
   padding: 8px 12px 8px 12px;
   border-radius: 8px;
 }
@@ -99,11 +98,21 @@ a {
   transform: scale(1.0);
 }
 
+.toggle-temp.celcius {
+  background: var(--temp-button-celcius);
+}
+
+.toggle-temp.fahrenheit {
+  background: var(--temp-button-fahrenheit);
+}
+
 .weather-info-container {
   background: rgba(255, 255, 255, 0.10);
+  background-image: url(./assets/message/search-city.png);
   border-radius: 16px;
   box-shadow: 0 4px 24px rgba(52, 120, 246, 0.15);
   padding: 2rem;
   max-width: 800px;
+  height: 500px;
   margin: 2rem auto;
 }

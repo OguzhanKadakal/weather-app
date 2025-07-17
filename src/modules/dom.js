@@ -1,4 +1,5 @@
 import searchIconSvg from '../assets/tools/search.svg';
+import { fetchWeatherData } from '../modules/weather-data'
 
 function createDOM() {
   const appElement = document.querySelector('#app');
@@ -67,4 +68,8 @@ function createDOM() {
   mainElement.appendChild(weatherInfoContainer);
 }
 
+
+function displayWeatherInfo() {
+
+}
 export { createDOM };

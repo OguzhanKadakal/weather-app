@@ -35,8 +35,9 @@ function createDOM() {
 
   const toggleButton = document.createElement('button');
   toggleButton.type = 'button';
-  toggleButton.className = 'toggle-temp celcius';
+  toggleButton.className = 'toggle-temp celsius';
   toggleButton.textContent = '°C / °F';
+  toggleButton.dataset.unit = 'metric';
 
   searchContainer.appendChild(searchInputGroup);
 
@@ -67,15 +68,24 @@ function displayWeatherInfo(data) {
   const weatherInfoContainer = document.querySelector('#weather-info');
   weatherInfoContainer.innerHTML = '';
 
-  //if (!data) {
-  // weatherInfoContainer.innerHTML = '<p>No weather data available</p>';
-  // return;
-  //}
+  if (!data) {
+    weatherInfoContainer.innerHTML = '<p>No weather data available</p>';
+    return;
+  }
 
   const resolvedAddress = document.createElement('h2');
+  resolvedAddress.className = 'address';
   resolvedAddress.textContent = data.resolvedAddress;
 
-  weatherInfoContainer.appendChild(resolvedAddress);
+  const temp = document.createElement('h2');
+
+  const unit = document.querySelector('.toggle-temp').dataset.unit;
+  temp.textContent = unit === 'metric'
+    ? `${data.currentConditions.temp} °C`
+    : `${data.currentConditions.temp} °F`;
+  resolvedAddress.className = 'tempature';
+
+  weatherInfoContainer.append(resolvedAddress, temp);
 }
 
 export { createDOM, displayWeatherInfo };

@@ -1,6 +1,7 @@
 import { fetchWeatherData } from './weather-data.js';
 import { displayWeatherInfo } from './dom.js';
 
+
 let currentCity = null;
 
 function setupSearchEvents() {

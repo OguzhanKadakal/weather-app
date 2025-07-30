@@ -1,5 +1,6 @@
 import searchIconSvg from '../assets/tools/search.svg';
 import spinnerSvg from '../assets/tools/eclipse.svg';
+import noWeatherDataIcon from '../assets/message/no-weather-data.png';
 
 function createDOM() {
   const appElement = document.querySelector('#app');
@@ -62,9 +63,8 @@ function createDOM() {
   const spinner = document.createElement('img');
   spinner.src = spinnerSvg;
   spinner.alt = 'Spinner SVG';
-  spinner.className ='spinner';
+  spinner.className = 'spinner';
   mainElement.appendChild(spinner);
-
 
   appElement.appendChild(headerElement);
   appElement.appendChild(mainElement);
@@ -73,12 +73,27 @@ function createDOM() {
   mainElement.appendChild(weatherInfoContainer);
 }
 
-function displayWeatherInfo(data) {  //Will be updated - inner html not recomended
+//Dynamically loads weather ıcons
+async function getWeatherIcon(iconName) {
+  try {
+    const icon = await import(`../assets/weather-icons/${iconName}.svg`);
+    return icon.default;
+  } catch {
+    console.error(`Missing icon for ${iconName}`);
+    return null;
+  }
+}
+
+async function displayWeatherInfo(data) {
   const weatherInfoContainer = document.querySelector('#weather-info');
   weatherInfoContainer.innerHTML = '';
 
   if (!data) {
-    weatherInfoContainer.innerHTML = '<p>No weather data available</p>';
+    const noDataImg = document.createElement('img');
+    noDataImg.src = noWeatherDataIcon;
+    noDataImg.alt = 'No weather data available';
+    noDataImg.className = 'no-weather-data-icon';
+    weatherInfoContainer.appendChild(noDataImg);
     return;
   }
 
@@ -86,15 +101,22 @@ function displayWeatherInfo(data) {  //Will be updated - inner html not recomend
   resolvedAddress.className = 'address';
   resolvedAddress.textContent = data.resolvedAddress;
 
-  const temp = document.createElement('h2');
+  const iconName = data.currentConditions.icon;
+  const iconSrc = await getWeatherIcon(iconName);
+  const weatherImg = document.createElement('img');
+  weatherImg.className = 'weather-icon';
+  weatherImg.alt = iconName;
+  if (iconSrc) {
+    weatherImg.src = iconSrc;
+  }
 
+  const temp = document.createElement('h2');
   const unit = document.querySelector('.toggle-temp').dataset.unit;
-  temp.textContent = unit === 'metric'
-    ? `${data.currentConditions.temp} °C`
-    : `${data.currentConditions.temp} °F`;
+  temp.textContent =
+    unit === 'metric' ? `${data.currentConditions.temp} °C` : `${data.currentConditions.temp} °F`;
   resolvedAddress.className = 'tempature';
 
-  weatherInfoContainer.append(resolvedAddress, temp);
+  weatherInfoContainer.append(temp, weatherImg, resolvedAddress);
 }
 
 export { createDOM, displayWeatherInfo };

@@ -124,3 +124,7 @@ a {
   transform: translate(-50%, -50%);
   display: none;
 }
+
+.weather-icon {
+  max-width: 200px;
+}

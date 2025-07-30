@@ -63,7 +63,7 @@ function createDOM() {
   spinner.src = spinnerSvg;
   spinner.alt = 'Spinner SVG';
   spinner.className ='spinner';
-  weatherInfoContainer.appendChild(spinner);
+  mainElement.appendChild(spinner);
 
 
   appElement.appendChild(headerElement);

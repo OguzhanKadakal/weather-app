@@ -41,14 +41,18 @@ function setupSearchEvents() {
 
 function toggleUnit() {
   const toggleTempButton = document.querySelector('.toggle-temp');
+  const spinner = document.querySelector('.spinner');
+  
 
   toggleTempButton.addEventListener('click', async () => {
     if (toggleTempButton.dataset.unit === 'metric') {
       toggleTempButton.dataset.unit = 'us';
       toggleTempButton.className = 'toggle-temp fahrenheit';
+      spinner ? spinner.style.display = 'block' : null;
     } else {
       toggleTempButton.dataset.unit = 'metric';
       toggleTempButton.className = 'toggle-temp celsius';
+      spinner ? spinner.style.display = 'block' : null;
     }
     if (currentCity) {
       try {
@@ -57,6 +61,8 @@ function toggleUnit() {
         displayWeatherInfo(weatherData);
       } catch (error) {
         console.error('Error refreshing weather data:', error);
+      }  finally {
+        spinner ? spinner.style.display = 'none' : null;
       }
     }
   });

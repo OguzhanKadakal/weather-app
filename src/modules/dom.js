@@ -1,4 +1,5 @@
 import searchIconSvg from '../assets/tools/search.svg';
+import spinnerSvg from '../assets/tools/eclipse.svg';
 
 function createDOM() {
   const appElement = document.querySelector('#app');
@@ -22,6 +23,7 @@ function createDOM() {
   const searchButton = document.createElement('button');
   searchButton.type = 'button';
   searchButton.className = 'search-button';
+
   const searchIcon = document.createElement('img');
   searchIcon.src = searchIconSvg;
   searchIcon.alt = 'Search';
@@ -57,6 +59,13 @@ function createDOM() {
   weatherInfoContainer.id = 'weather-info';
   weatherInfoContainer.className = 'weather-info-container';
 
+  const spinner = document.createElement('img');
+  spinner.src = spinnerSvg;
+  spinner.alt = 'Spinner SVG';
+  spinner.className ='spinner';
+  weatherInfoContainer.appendChild(spinner);
+
+
   appElement.appendChild(headerElement);
   appElement.appendChild(mainElement);
   appElement.appendChild(footerElement);
@@ -64,7 +73,7 @@ function createDOM() {
   mainElement.appendChild(weatherInfoContainer);
 }
 
-function displayWeatherInfo(data) {
+function displayWeatherInfo(data) {  //Will be updated - inner html not recomended
   const weatherInfoContainer = document.querySelector('#weather-info');
   weatherInfoContainer.innerHTML = '';
 

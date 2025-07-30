@@ -7,8 +7,13 @@ function setupSearchEvents() {
   const searchInput = document.querySelector('#search-input');
   const searchButton = document.querySelector('.search-button');
   const toggleTempButton = document.querySelector('.toggle-temp');
+  
+
 
   const handleSearch = async () => {
+    const spinner = document.querySelector('.spinner');
+    spinner ? spinner.style.display = 'block' : null;
+    
     const query = searchInput.value.trim().toLowerCase();
     const unitGroup = toggleTempButton.dataset.unit;
     if ((query, unitGroup)) {
@@ -20,6 +25,8 @@ function setupSearchEvents() {
       } catch (error) {
         console.error('Error fetching weather data:', error);
         displayWeatherInfo(null);
+      } finally {
+        spinner ? spinner.style.display = 'none' : null;
       }
     }
   };

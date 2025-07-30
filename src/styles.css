@@ -1,10 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@400..800&display=swap');
 :root {
-    --background-gradient: linear-gradient(to bottom, #69BFFF, #3478F6);
-    --text-color: #FAFAFA;
-    --input-background: #3d3d3d;
-    --temp-button-celsius: linear-gradient(to right, #FFD600 20%, #FAFAFA 70%);
-    --temp-button-fahrenheit: linear-gradient(to right, #FAFAFA 20%, #FFD600 70%);
+  --background-gradient: linear-gradient(to bottom, #69bfff, #3478f6);
+  --text-color: #fafafa;
+  --input-background: #3d3d3d;
+  --temp-button-celsius: linear-gradient(to right, #ffd600 20%, #fafafa 70%);
+  --temp-button-fahrenheit: linear-gradient(to right, #fafafa 20%, #ffd600 70%);
 }
 
 /* CSS Reset */
@@ -77,11 +77,11 @@ a {
 }
 
 .search-button:hover {
-  transform: scale(1.20);
+  transform: scale(1.2);
 }
 
 .search-button:active {
-  transform: scale(1.0);
+  transform: scale(1);
 }
 
 .toggle-temp {
@@ -91,15 +91,15 @@ a {
 }
 
 .toggle-temp:hover {
-  transform: scale(1.10);
+  transform: scale(1.1);
 }
 
 .toggle-temp:active {
-  transform: scale(1.0);
+  transform: scale(1);
 }
 
 .toggle-temp.celsius {
-  background: var(--temp-button-celsius );
+  background: var(--temp-button-celsius);
 }
 
 .toggle-temp.fahrenheit {
@@ -107,11 +107,20 @@ a {
 }
 
 .weather-info-container {
-  background: rgba(255, 255, 255, 0.10);
+  background: rgba(255, 255, 255, 0.1);
   border-radius: 16px;
   box-shadow: 0 4px 24px rgba(52, 120, 246, 0.15);
   padding: 2rem;
   max-width: 800px;
   height: 720px;
   margin: 2rem auto;
+}
+
+.spinner {
+  max-width: 10rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: none;
 }

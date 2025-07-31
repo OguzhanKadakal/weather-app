@@ -107,13 +107,16 @@ a {
 }
 
 .weather-info-container {
-  background: rgba(255, 255, 255, 0.1);
   border-radius: 16px;
+  border: 1px solid rgba(250, 250, 250, 0.2);
   box-shadow: 0 4px 24px rgba(52, 120, 246, 0.15);
   padding: 2rem;
   max-width: 800px;
-  height: 720px;
+  min-height: 700px;
   margin: 2rem auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
 .spinner {
@@ -125,6 +128,141 @@ a {
   display: none;
 }
 
+.weather-details {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  border-top: 1px solid rgba(250, 250, 250, 0.2);
+  border-bottom: 1px solid rgba(250, 250, 250, 0.2);
+}
+
+.current-details {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.temperature {
+  font-size: 5rem;
+}
+
+.wind-speed {
+  font-size: 2.5rem;
+}
+
+.humidity {
+  font-size: 2.5rem;
+}
+
 .weather-icon {
-  max-width: 200px;
+  max-width: 400px;
+}
+
+.forecast-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  max-height: 200px;
+}
+
+.forecast-icon {
+  width: 70px;
+}
+
+.forecast-day {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-width: 110px;
+  border: 1px solid rgba(250, 250, 250, 0.2);
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.credit-link {
+  text-align: center;
+  text-decoration: none;
+}
+
+.credit-link:hover {
+  color: #ffd600;
+}
+
+@media (max-width: 900px) {
+  .header {
+    flex-direction: column;
+    gap: 1rem;
+    padding: 0.5rem;
+  }
+  .weather-info-container {
+    padding: 1rem;
+    min-height: 500px;
+    max-width: 95vw;
+  }
+  .forecast-container {
+    flex-wrap: wrap;
+    gap: 1rem;
+    max-height: none;
+  }
+  .forecast-day {
+    min-width: 90px;
+    padding: 0.5rem;
+  }
+  .weather-icon {
+    max-width: 250px;
+  }
+  .temperature {
+    font-size: 3rem;
+  }
+  .wind-speed,
+  .humidity {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 600px) {
+  body {
+    background: linear-gradient(to bottom, #3478f6 0%, #69bfff 100%);
+  }
+
+  .header {
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0.25rem;
+  }
+  .weather-info-container {
+    padding: 0.5rem;
+    min-height: 350px;
+    max-width: 95vw;
+  }
+
+  .weather-details {
+    min-height: auto;
+  }
+  .forecast-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .forecast-day {
+    min-width: unset;
+    width: 50%;
+    padding: 0.5rem;
+  }
+  .weather-icon {
+    max-width: 120px;
+  }
+  .temperature {
+    font-size: 2rem;
+  }
+  .wind-speed,
+  .humidity {
+    font-size: 1rem;
+  }
 }

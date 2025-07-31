@@ -1,6 +1,7 @@
 import searchIconSvg from '../assets/tools/search.svg';
 import spinnerSvg from '../assets/tools/eclipse.svg';
 import noWeatherDataIcon from '../assets/message/no-weather-data.png';
+import { format, compareAsc } from 'date-fns';
 
 function createDOM() {
   const appElement = document.querySelector('#app');
@@ -60,6 +61,13 @@ function createDOM() {
   weatherInfoContainer.id = 'weather-info';
   weatherInfoContainer.className = 'weather-info-container';
 
+  const creditLink = document.createElement('a');
+  creditLink.href = 'https://github.com/OguzhanKadakal';
+  creditLink.textContent = 'Created by Oğuzhan Kadakal';
+  creditLink.target = '_blank';
+  creditLink.className = 'credit-link';
+  footerElement.appendChild(creditLink);
+
   const spinner = document.createElement('img');
   spinner.src = spinnerSvg;
   spinner.alt = 'Spinner SVG';
@@ -84,6 +92,7 @@ async function getWeatherIcon(iconName) {
   }
 }
 
+//Creates weather info elements
 async function displayWeatherInfo(data) {
   const weatherInfoContainer = document.querySelector('#weather-info');
   weatherInfoContainer.innerHTML = '';
@@ -97,9 +106,22 @@ async function displayWeatherInfo(data) {
     return;
   }
 
+  // Group address and date in a container
+  const infoHeader = document.createElement('div');
+  infoHeader.className = 'info-header';
+
   const resolvedAddress = document.createElement('h2');
   resolvedAddress.className = 'address';
   resolvedAddress.textContent = data.resolvedAddress;
+
+  const today = document.createElement('h3');
+  today.textContent = `${format(new Date(), 'dd MMMM yyyy')}`;
+  today.className = 'today-date';
+
+  infoHeader.append(resolvedAddress, today);
+
+  const weatherDetails = document.createElement('div');
+  weatherDetails.className = 'weather-details';
 
   const iconName = data.currentConditions.icon;
   const iconSrc = await getWeatherIcon(iconName);
@@ -110,13 +132,64 @@ async function displayWeatherInfo(data) {
     weatherImg.src = iconSrc;
   }
 
+  const detailsDiv = document.createElement('div');
+  detailsDiv.className = 'current-details';
+
   const temp = document.createElement('h2');
   const unit = document.querySelector('.toggle-temp').dataset.unit;
   temp.textContent =
     unit === 'metric' ? `${data.currentConditions.temp} °C` : `${data.currentConditions.temp} °F`;
-  resolvedAddress.className = 'tempature';
+  temp.className = 'temperature';
 
-  weatherInfoContainer.append(temp, weatherImg, resolvedAddress);
+  const windSpeed = document.createElement('p');
+  windSpeed.className = 'wind-speed';
+  if (unit === 'metric') {
+    windSpeed.textContent = `Wind: ${data.currentConditions.windspeed} km/h`;
+  } else {
+    windSpeed.textContent = `Wind: ${data.currentConditions.windspeed} mph`;
+  }
+
+  const humidity = document.createElement('p');
+  humidity.textContent = `Humidity: ${data.currentConditions.humidity}`;
+  humidity.className = 'humidity';
+
+  detailsDiv.append(temp, windSpeed, humidity);
+
+  const forecastContainer = document.createElement('div');
+  forecastContainer.className = 'forecast-container';
+
+  data.days.slice(1, 6).forEach(async (forecastDay, i) => {
+    const dayDiv = document.createElement('div');
+    dayDiv.className = 'forecast-day';
+
+    const date = new Date(forecastDay.datetime);
+    const dayLabel = document.createElement('span');
+    dayLabel.className = 'forecast-date';
+    if (i === 0) {
+      dayLabel.textContent = 'Tomorrow';
+    } else {
+      dayLabel.textContent = format(date, 'EEE, dd MMM');
+    }
+
+    const iconSrc = await getWeatherIcon(forecastDay.icon);
+    const iconImg = document.createElement('img');
+    iconImg.className = 'forecast-icon';
+    iconImg.alt = forecastDay.icon;
+    if (iconSrc) {
+      iconImg.src = iconSrc;
+    }
+
+    const tempSpan = document.createElement('span');
+    tempSpan.className = 'forecast-temp';
+    tempSpan.textContent = unit === 'metric' ? `${forecastDay.temp} °C` : `${forecastDay.temp} °F`;
+
+    dayDiv.append(dayLabel, iconImg, tempSpan);
+    forecastContainer.appendChild(dayDiv);
+  });
+
+  weatherDetails.append(weatherImg, detailsDiv);
+
+  weatherInfoContainer.append(infoHeader, weatherDetails, forecastContainer);
 }
 
 export { createDOM, displayWeatherInfo };

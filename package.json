@@ -24,5 +24,8 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format": "prettier --write ."
+  },
+  "dependencies": {
+    "date-fns": "^4.1.0"
   }
 }

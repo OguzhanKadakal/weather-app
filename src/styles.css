@@ -194,6 +194,15 @@ a {
   color: #ffd600;
 }
 
+.no-weather-data-icon {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  height: auto;
+  max-width: 100vw;
+}
+
 @media (max-width: 900px) {
   .header {
     flex-direction: column;

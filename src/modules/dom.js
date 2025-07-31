@@ -1,7 +1,7 @@
 import searchIconSvg from '../assets/tools/search.svg';
 import spinnerSvg from '../assets/tools/eclipse.svg';
 import noWeatherDataIcon from '../assets/message/no-weather-data.png';
-import { format, compareAsc } from 'date-fns';
+import { format } from 'date-fns';
 
 function createDOM() {
   const appElement = document.querySelector('#app');

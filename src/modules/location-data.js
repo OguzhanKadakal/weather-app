@@ -1,19 +1,12 @@
 async function fetchLocation() {
   try {
-    const ipResponse = await fetch('https://api.ipify.org?format=json');
-    if (!ipResponse.ok) {
-      throw new Error('Could not fetch IP');
-    }
-    const ipData = await ipResponse.json();
-
-    // Use HTTPS here to avoid mixed content issues
-    const locationResponse = await fetch(`https://ip-api.com/json/${ipData.ip}`);
+    const locationResponse = await fetch('https://ipapi.co/json/');
     if (!locationResponse.ok) {
       throw new Error('Could not fetch location');
     }
     const locationData = await locationResponse.json();
 
-    return `${locationData.city}, ${locationData.country}`;
+    return `${locationData.city}, ${locationData.country_name}`;
   } catch (error) {
     console.error('Location fetch error:', error);
     return 'New York';

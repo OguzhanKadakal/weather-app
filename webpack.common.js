@@ -13,12 +13,14 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './src/index.html',
       title: 'Aeris Weather App',
+      inject: true,
     }),
   ],
   module: {
     rules: [
       {
         test: /\.html$/,
+        exclude: path.resolve(__dirname, 'src/index.html'),
         use: ['html-loader'],
       },
       {

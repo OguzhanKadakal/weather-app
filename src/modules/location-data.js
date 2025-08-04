@@ -6,7 +6,8 @@ async function fetchLocation() {
     }
     const ipData = await ipResponse.json();
 
-    const locationResponse = await fetch(`http://ip-api.com/json/${ipData.ip}`);
+    // Use HTTPS here to avoid mixed content issues
+    const locationResponse = await fetch(`https://ip-api.com/json/${ipData.ip}`);
     if (!locationResponse.ok) {
       throw new Error('Could not fetch location');
     }

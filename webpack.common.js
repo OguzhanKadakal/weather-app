@@ -13,22 +13,11 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './src/index.html',
       title: 'Aeris Weather App',
-      templateParameters: {
-        htmlWebpackPlugin: {
-          options: {
-            title: 'Aeris Weather App',
-          },
-        },
-      },
+      inject: 'body',
     }),
   ],
   module: {
     rules: [
-      {
-        test: /\.html$/,
-        exclude: path.resolve(__dirname, 'src/index.html'),
-        use: ['html-loader'],
-      },
       {
         test: /\.css$/i,
         use: ['style-loader', 'css-loader'],

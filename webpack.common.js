@@ -6,13 +6,13 @@ module.exports = {
   entry: './src/index.js',
   output: {
     filename: '[name].bundle.js',
-    path: path.resolve(__dirname, '../dist'),
+    path: path.resolve(__dirname, 'dist'), // Fixed: removed '../'
     clean: true,
   },
   plugins: [
     new HtmlWebpackPlugin({
       template: './src/index.html',
-      title: 'Webpack Template',
+      title: 'Aeris Weather App', // Updated title
     }),
   ],
   module: {
@@ -28,7 +28,7 @@ module.exports = {
       {
         test: /\.(png|jpe?g|gif|svg)$/i,
         type: 'asset/resource',
-      }
+      },
     ],
   },
 };

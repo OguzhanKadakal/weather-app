@@ -6,13 +6,13 @@ module.exports = {
   entry: './src/index.js',
   output: {
     filename: '[name].bundle.js',
-    path: path.resolve(__dirname, 'dist'), // Fixed: removed '../'
+    path: path.resolve(__dirname, 'dist'),
     clean: true,
   },
   plugins: [
     new HtmlWebpackPlugin({
       template: './src/index.html',
-      title: 'Aeris Weather App', // Updated title
+      title: 'Aeris Weather App',
     }),
   ],
   module: {

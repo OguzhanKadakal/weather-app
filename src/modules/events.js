@@ -1,23 +1,64 @@
 import { fetchWeatherData } from './weather-data.js';
 import { displayWeatherInfo } from './dom.js';
-
+import { fetchLocation } from './location-data.js';
 
 let currentCity = null;
+
+async function currentLocationDisplay() {
+  const toggleTempButton = document.querySelector('.toggle-temp');
+  const spinner = document.querySelector('.spinner');
+
+  // Show spinner while loading
+  if (spinner) spinner.style.display = 'block';
+
+  try {
+    // Initialize unit if not set
+    if (!toggleTempButton.dataset.unit) {
+      toggleTempButton.dataset.unit = 'us';
+      toggleTempButton.className = 'toggle-temp fahrenheit';
+    }
+
+    const unitGroup = toggleTempButton.dataset.unit;
+    const location = await fetchLocation();
+
+    if (location) {
+      console.log('Fetching weather for location:', location);
+      const weatherData = await fetchWeatherData(location, unitGroup);
+      currentCity = location;
+      displayWeatherInfo(weatherData);
+    } else {
+      throw new Error('Could not determine location');
+    }
+  } catch (error) {
+    console.error('Error fetching location weather data:', error);
+    displayWeatherInfo(null);
+  } finally {
+    // Hide spinner when done
+    if (spinner) spinner.style.display = 'none';
+  }
+}
 
 function setupSearchEvents() {
   const searchInput = document.querySelector('#search-input');
   const searchButton = document.querySelector('.search-button');
   const toggleTempButton = document.querySelector('.toggle-temp');
-  
-
 
   const handleSearch = async () => {
     const spinner = document.querySelector('.spinner');
-    spinner ? spinner.style.display = 'block' : null;
-    
+    if (spinner) spinner.style.display = 'block';
+
     const query = searchInput.value.trim().toLowerCase();
+
+    // Initialize unit if not set
+    if (!toggleTempButton.dataset.unit) {
+      toggleTempButton.dataset.unit = 'us';
+      toggleTempButton.className = 'toggle-temp fahrenheit';
+    }
+
     const unitGroup = toggleTempButton.dataset.unit;
-    if ((query, unitGroup)) {
+
+    if (query) {
+      // Fix: Only check if query exists
       searchInput.value = '';
       try {
         const weatherData = await fetchWeatherData(query, unitGroup);
@@ -27,8 +68,10 @@ function setupSearchEvents() {
         console.error('Error fetching weather data:', error);
         displayWeatherInfo(null);
       } finally {
-        spinner ? spinner.style.display = 'none' : null;
+        if (spinner) spinner.style.display = 'none';
       }
+    } else {
+      if (spinner) spinner.style.display = 'none';
     }
   };
 
@@ -42,19 +85,25 @@ function setupSearchEvents() {
 
 function toggleUnit() {
   const toggleTempButton = document.querySelector('.toggle-temp');
-  const spinner = document.querySelector('.spinner');
-  
+
+  // Initialize unit if not set
+  if (!toggleTempButton.dataset.unit) {
+    toggleTempButton.dataset.unit = 'us';
+    toggleTempButton.className = 'toggle-temp fahrenheit';
+  }
 
   toggleTempButton.addEventListener('click', async () => {
+    const spinner = document.querySelector('.spinner');
+    if (spinner) spinner.style.display = 'block';
+
     if (toggleTempButton.dataset.unit === 'metric') {
       toggleTempButton.dataset.unit = 'us';
       toggleTempButton.className = 'toggle-temp fahrenheit';
-      spinner ? spinner.style.display = 'block' : null;
     } else {
       toggleTempButton.dataset.unit = 'metric';
       toggleTempButton.className = 'toggle-temp celsius';
-      spinner ? spinner.style.display = 'block' : null;
     }
+
     if (currentCity) {
       try {
         const unitGroup = toggleTempButton.dataset.unit;
@@ -62,11 +111,13 @@ function toggleUnit() {
         displayWeatherInfo(weatherData);
       } catch (error) {
         console.error('Error refreshing weather data:', error);
-      }  finally {
-        spinner ? spinner.style.display = 'none' : null;
+      } finally {
+        if (spinner) spinner.style.display = 'none';
       }
+    } else {
+      if (spinner) spinner.style.display = 'none';
     }
   });
 }
 
-export { setupSearchEvents, toggleUnit };
+export { setupSearchEvents, toggleUnit, currentLocationDisplay };

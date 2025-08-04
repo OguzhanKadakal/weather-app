@@ -1,7 +1,10 @@
-import './styles.css' 
-import { createDOM } from './modules/dom';
-import { setupSearchEvents, toggleUnit } from './modules/events';
+import './styles.css';
+import { createDOM } from './modules/dom.js';
+import { setupSearchEvents, toggleUnit, currentLocationDisplay } from './modules/events.js';
 
-createDOM();
-setupSearchEvents();
-toggleUnit();
+document.addEventListener('DOMContentLoaded', async () => {
+  createDOM();
+  setupSearchEvents();
+  toggleUnit();
+  await currentLocationDisplay();
+});

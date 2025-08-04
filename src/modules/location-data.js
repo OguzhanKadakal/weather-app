@@ -12,7 +12,7 @@ async function fetchLocation() {
     }
     const locationData = await locationResponse.json();
 
-    return locationData.city;
+    return `${locationData.city}, ${locationData.country}`;
   } catch (error) {
     console.error('Location fetch error:', error);
     return 'New York'; // Fallback city

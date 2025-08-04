@@ -15,7 +15,7 @@ async function fetchLocation() {
     return `${locationData.city}, ${locationData.country}`;
   } catch (error) {
     console.error('Location fetch error:', error);
-    return 'New York'; // Fallback city
+    return 'New York';
   }
 }
 

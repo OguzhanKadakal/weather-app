@@ -8,11 +8,9 @@ async function currentLocationDisplay() {
   const toggleTempButton = document.querySelector('.toggle-temp');
   const spinner = document.querySelector('.spinner');
 
-  // Show spinner while loading
   if (spinner) spinner.style.display = 'block';
 
   try {
-    // Initialize unit if not set
     if (!toggleTempButton.dataset.unit) {
       toggleTempButton.dataset.unit = 'us';
       toggleTempButton.className = 'toggle-temp fahrenheit';
@@ -33,7 +31,6 @@ async function currentLocationDisplay() {
     console.error('Error fetching location weather data:', error);
     displayWeatherInfo(null);
   } finally {
-    // Hide spinner when done
     if (spinner) spinner.style.display = 'none';
   }
 }
@@ -49,7 +46,6 @@ function setupSearchEvents() {
 
     const query = searchInput.value.trim().toLowerCase();
 
-    // Initialize unit if not set
     if (!toggleTempButton.dataset.unit) {
       toggleTempButton.dataset.unit = 'us';
       toggleTempButton.className = 'toggle-temp fahrenheit';
@@ -58,7 +54,6 @@ function setupSearchEvents() {
     const unitGroup = toggleTempButton.dataset.unit;
 
     if (query) {
-      // Fix: Only check if query exists
       searchInput.value = '';
       try {
         const weatherData = await fetchWeatherData(query, unitGroup);
@@ -86,7 +81,6 @@ function setupSearchEvents() {
 function toggleUnit() {
   const toggleTempButton = document.querySelector('.toggle-temp');
 
-  // Initialize unit if not set
   if (!toggleTempButton.dataset.unit) {
     toggleTempButton.dataset.unit = 'us';
     toggleTempButton.className = 'toggle-temp fahrenheit';

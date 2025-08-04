@@ -18,7 +18,7 @@ function createDOM() {
 
   const searchInput = document.createElement('input');
   searchInput.type = 'text';
-  searchInput.placeholder = 'Search city...';
+  searchInput.placeholder = 'Enter city and country...';
   searchInput.className = 'search-box';
   searchInput.id = 'search-input';
 
@@ -92,7 +92,7 @@ async function getWeatherIcon(iconName) {
   }
 }
 
-//Creates weather info elements
+
 async function displayWeatherInfo(data) {
   const weatherInfoContainer = document.querySelector('#weather-info');
   weatherInfoContainer.innerHTML = '';
@@ -106,7 +106,6 @@ async function displayWeatherInfo(data) {
     return;
   }
 
-  // Group address and date in a container
   const infoHeader = document.createElement('div');
   infoHeader.className = 'info-header';
 

@@ -65,9 +65,8 @@ For current conditions and forecasts, view:
 
 ### 🎯 **APIs Used**
 
-- **Visual Crossing Weather API** - Weather data and forecasts
-- **ipify.org** - IP address detection
-- **ip-api.com** - IP-to-location conversion
+- **Visual Crossing Weather API** – Provides weather data and forecasts  
+- **ipapi.co** – Used for IP-based location detection via `fetch('https://ipapi.co/json/');`
 
 ### 🖼️ **Weather Icons**
 

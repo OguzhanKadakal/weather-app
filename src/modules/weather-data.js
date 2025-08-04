@@ -1,6 +1,6 @@
 async function fetchWeatherData(cityName, unitGroup) {
   try {
-    const API_KEY = '3X2GKSVWXJUECMJJ36QRVLJLX';
+    const API_KEY = '8MSX4HPB9FZ4A8FEKYTM79NLW';
     const response = await fetch(
       `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${cityName}?unitGroup=${unitGroup}&key=${API_KEY}&contentType=json`
     );
